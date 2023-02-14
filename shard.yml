@@ -1,0 +1,13 @@
+name: chess
+version: 0.1.0
+
+authors:
+  - Moisès Macià <mmacia@gmail.com>
+
+targets:
+  chess:
+    main: src/chess.cr
+
+crystal: 1.7.2
+
+license: MIT
