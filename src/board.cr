@@ -39,6 +39,14 @@ class Chess::Board
     8.times { |col| move Piece.make_white, {7, col} }
   end
 
+  def valid_move?(piece : Piece, position : Position) : Bool
+    return false unless in_bounds?(position)
+    target = get(position)
+
+    return true if target.nil? || target.not_nil!.color != piece.color
+    false
+  end
+
   private def in_bounds?(position : Position) : Bool
     row, col = position
     return false if row < 0 || row > 7
