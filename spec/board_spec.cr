@@ -82,7 +82,7 @@ describe Chess::Board do
       board.valid_move?(piece, target_pos).should be_true
     end
 
-    it "should return true if the piece is moved to a square with a piece from other color" do
+    it "should return true if the piece is moved to a square with a piece of other color" do
       piece = PieceFactory.random(Chess::Color::White)
       board = BoardFactory.empty_with_piece_in_the_middle_of_board(piece)
       initial_pos = piece.position
@@ -94,7 +94,7 @@ describe Chess::Board do
       board.valid_move?(piece, target_pos).should be_true
     end
 
-    it "should return false if the piece is moved to a square with a piece from same color" do
+    it "should return false if the piece is moved to a square with a piece of same color" do
       piece = PieceFactory.random(Chess::Color::White)
       board = BoardFactory.piece_completely_surrounded(piece)
       initial_pos = piece.position
