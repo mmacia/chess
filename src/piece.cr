@@ -4,6 +4,79 @@ abstract class Chess::Piece
   getter color : Color
   property position : Position
 
+  private RELATIVE_MOVES_UP = [
+    {-1, 0},
+    {-2, 0},
+    {-3, 0},
+    {-4, 0},
+    {-5, 0},
+    {-6, 0},
+    {-7, 0},
+  ]
+  private RELATIVE_MOVES_UP_RIGHT = [
+    {1, 1},
+    {2, 2},
+    {3, 3},
+    {4, 4},
+    {5, 5},
+    {6, 6},
+    {7, 7},
+  ]
+  private RELATIVE_MOVES_RIGHT = [
+    {0, 1},
+    {0, 2},
+    {0, 3},
+    {0, 4},
+    {0, 5},
+    {0, 6},
+    {0, 7},
+  ]
+  private RELATIVE_MOVES_DOWN_RIGHT = [
+    {1, -1},
+    {2, -2},
+    {3, -3},
+    {4, -4},
+    {5, -5},
+    {6, -6},
+    {7, -7},
+  ]
+  private RELATIVE_MOVES_DOWN = [
+    {1, 0},
+    {2, 0},
+    {3, 0},
+    {4, 0},
+    {5, 0},
+    {6, 0},
+    {7, 0},
+  ]
+  private RELATIVE_MOVES_DOWN_LEFT = [
+    {-1, -1},
+    {-2, -2},
+    {-3, -3},
+    {-4, -4},
+    {-5, -5},
+    {-6, -6},
+    {-7, -7},
+  ]
+  private RELATIVE_MOVES_LEFT = [
+    {0, -1},
+    {0, -2},
+    {0, -3},
+    {0, -4},
+    {0, -5},
+    {0, -6},
+    {0, -7},
+  ]
+  private RELATIVE_MOVES_UP_LEFT = [
+    {-1, 1},
+    {-2, 2},
+    {-3, 3},
+    {-4, 4},
+    {-5, 5},
+    {-6, 6},
+    {-7, 7},
+  ]
+
   def initialize(@color : Color, @position : Position = {-1, -1})
   end
 
@@ -25,6 +98,9 @@ abstract class Chess::Piece
 
         if board.valid_move?(self, move)
           moves << move
+          break if !board.empty?(move)  # do not allow jump over pieces
+        else
+          break  # do not allow jump over pieces
         end
       end
     end

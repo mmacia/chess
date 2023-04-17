@@ -112,4 +112,18 @@ describe Chess::Board do
       board.valid_move?(piece, target_pos).should be_false
     end
   end
+
+  describe "#empty?" do
+    it "should return true if the position is empty" do
+      board = Chess::Board.new
+      board.empty?({0, 0}).should be_true
+    end
+
+    it "should return false if the position is not empty" do
+      piece = PieceFactory.random
+      board = BoardFactory.empty_with_piece_in_the_middle_of_board(piece)
+
+      board.empty?({3, 3}).should be_false
+    end
+  end
 end

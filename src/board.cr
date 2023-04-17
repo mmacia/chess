@@ -47,6 +47,10 @@ class Chess::Board
     false
   end
 
+  def empty?(position : Position) : Bool
+    get(position).nil?
+  end
+
   private def in_bounds?(position : Position) : Bool
     row, col = position
     return false if row < 0 || row > 7
