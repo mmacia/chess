@@ -19,4 +19,28 @@ describe Chess::Piece do
     subject.position = {1, 2}
     subject.position.should eq({1, 2})
   end
+
+  describe "#white?" do
+    it "should be white" do
+      piece = PieceFactory.random_class.make_white
+      piece.white?.should be_truthy
+    end
+
+    it "should not be white" do
+      piece = PieceFactory.random_class.make_black
+      piece.white?.should be_falsey
+    end
+  end
+
+  describe "#black?" do
+    it "should be black" do
+      piece = PieceFactory.random_class.make_black
+      piece.black?.should be_truthy
+    end
+
+    it "should not be black" do
+      piece = PieceFactory.random_class.make_white
+      piece.black?.should be_falsey
+    end
+  end
 end

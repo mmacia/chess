@@ -88,6 +88,14 @@ abstract class Chess::Piece
     new(Color::Black)
   end
 
+  def white? : Bool
+    self.color == Color::White
+  end
+
+  def black? : Bool
+    self.color == Color::Black
+  end
+
   def possible_moves(board : Board) : Array(Position)
     moves = [] of Position
     initial_pos = self.position

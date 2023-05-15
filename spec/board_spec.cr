@@ -44,7 +44,7 @@ describe Chess::Board do
     end
   end
 
-  pending "should setup a new board" do
+  it "should setup a new board" do
     subject.setup_new_game
 
     8.times do |col|
@@ -124,6 +124,40 @@ describe Chess::Board do
       board = BoardFactory.empty_with_piece_in_the_middle_of_board(piece)
 
       board.empty?({3, 3}).should be_false
+    end
+  end
+
+  describe "#in_bounds?" do
+    board = Chess::Board.new
+
+    it "should return false when row is negative" do
+      move = {-1, rand(0..7)}
+      board.in_bounds?(move).should be_falsey
+    end
+
+    it "should return false when col is negative" do
+      move = {rand(0..7), -1}
+      board.in_bounds?(move).should be_falsey
+    end
+
+    it "should return false when row is greater than 7" do
+      move = {8, rand(0..7)}
+      board.in_bounds?(move).should be_falsey
+    end
+
+    it "should return false when col is greater than 7" do
+      move = {rand(0..7), 8}
+      board.in_bounds?(move).should be_falsey
+    end
+
+    it "should return true when row is between 0 and 7" do
+      move = {rand(0..7), 3}
+      board.in_bounds?(move).should be_truthy
+    end
+
+    it "should return true when col is between 0 and 7" do
+      move = {3, rand(0..7)}
+      board.in_bounds?(move).should be_truthy
     end
   end
 end

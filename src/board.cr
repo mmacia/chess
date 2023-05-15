@@ -32,11 +32,25 @@ class Chess::Board
   def setup_new_game
     reset
 
-    8.times { |col| move Piece.make_black, {0, col} }
-    8.times { |col| move Piece.make_black, {1, col} }
+    move Rook.make_black, {0, 0}
+    move Knight.make_black, {0, 1}
+    move Bishop.make_black, {0, 2}
+    move Queen.make_black, {0, 3}
+    move King.make_black, {0, 4}
+    move Bishop.make_black, {0, 5}
+    move Knight.make_black, {0, 6}
+    move Rook.make_black, {0, 7}
+    8.times { |col| move Pawn.make_black, {1, col} }
 
-    8.times { |col| move Piece.make_white, {6, col} }
-    8.times { |col| move Piece.make_white, {7, col} }
+    8.times { |col| move Pawn.make_white, {6, col} }
+    move Rook.make_white, {7, 0}
+    move Knight.make_white, {7, 1}
+    move Bishop.make_white, {7, 2}
+    move Queen.make_white, {7, 3}
+    move King.make_white, {7, 4}
+    move Bishop.make_white, {7, 5}
+    move Knight.make_white, {7, 6}
+    move Rook.make_white, {7, 7}
   end
 
   def valid_move?(piece : Piece, position : Position) : Bool
@@ -51,7 +65,7 @@ class Chess::Board
     get(position).nil?
   end
 
-  private def in_bounds?(position : Position) : Bool
+  def in_bounds?(position : Position) : Bool
     row, col = position
     return false if row < 0 || row > 7
     return false if col < 0 || col > 7

@@ -45,4 +45,53 @@ module BoardFactory
 
     board
   end
+
+  def self.pawn_in_start_position(pawn : Chess::Pawn)
+    board = Chess::Board.new
+
+    if pawn.white?
+      board.move pawn, {6, 3}
+    else
+      board.move pawn, {1, 3}
+    end
+
+    board
+  end
+
+  def self.pawn_in_non_start_position(pawn : Chess::Pawn)
+    board = Chess::Board.new
+
+    if pawn.white?
+      board.move pawn, {5, 3}
+    else
+      board.move pawn, {2, 3}
+    end
+
+    board
+  end
+
+  def self.pawn_in_attack(pawn : Chess::Pawn, same_color : Bool = false)
+    board = Chess::Board.new
+
+    color =
+      if same_color
+        pawn.color
+      else
+        pawn.color == Chess::Color::White ? Chess::Color::Black : Chess::Color::White
+      end
+
+    other1, other2 = [PieceFactory.random(color), PieceFactory.random(color)]
+
+    board.move pawn, {4, 3}
+
+    if pawn.white?
+      board.move other1, {pawn.position[0] - 1, pawn.position[1] - 1}
+      board.move other2, {pawn.position[0] + 1, pawn.position[1] - 1}
+    else
+      board.move other1, {pawn.position[0] + 1, pawn.position[1] + 1}
+      board.move other2, {pawn.position[0] - 1, pawn.position[1] + 1}
+    end
+
+    board
+  end
 end
