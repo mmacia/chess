@@ -10,9 +10,22 @@ class Chess::Board
   def move(piece : Piece, position : Position)
     raise OutOfBounds.new(position) unless in_bounds?(position)
 
+    # set target piece as captured: pos = -1, -1
+    target = get(position)
+    target.not_nil!.position = {-1, -1} unless get(position).nil?
+
+    orig_position = piece.position
     piece.position = position
+
+    # place it in target
     row, col = position
     cells.update(row) { |row_| row_[col] = piece; row_ }
+
+    # set origin as empty
+    unless orig_position == {-1, -1}
+      row, col = orig_position
+      cells.update(row) { |row_| row_[col] = nil; row_ }
+    end
   end
 
   def get(position : Position) : Piece?

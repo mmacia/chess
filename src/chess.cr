@@ -2,6 +2,10 @@ require "./color"
 require "./errors"
 require "./piece"
 require "./board"
+require "./presenter"
+require "./player"
+require "./game"
+require "./finish_detector"
 
 
 

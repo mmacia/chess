@@ -43,4 +43,20 @@ describe Chess::Piece do
       piece.black?.should be_falsey
     end
   end
+
+  describe "#captured?" do
+    it "should return true when piece is captured" do
+      piece = PieceFactory.random
+      piece.position = {-1, -1}
+
+      piece.captured?.should be_true
+    end
+
+    it "should return false when piece is in play" do
+      piece = PieceFactory.random
+      piece.position = {3, 5}
+
+      piece.captured?.should be_false
+    end
+  end
 end

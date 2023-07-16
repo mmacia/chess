@@ -36,6 +36,20 @@ describe Chess::Board do
     end
   end
 
+  it "should set to nil the initial position after move" do
+    piece = PieceFactory.random
+    orig_position = {3, 5}
+
+    subject.reset
+    subject.move(piece, orig_position)
+
+    new_position = {2, 5}
+    subject.move(piece, new_position)
+
+    subject.get(orig_position).should be_nil
+    subject.get(new_position).should_not be_nil
+  end
+
   it "should not get a position out of bounds" do
     new_position = {4, 9}
 

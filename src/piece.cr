@@ -96,6 +96,10 @@ abstract class Chess::Piece
     self.color == Color::Black
   end
 
+  def captured? : Bool
+    self.position == {-1, -1}
+  end
+
   def possible_moves(board : Board) : Array(Position)
     moves = [] of Position
     initial_pos = self.position
